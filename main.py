@@ -14,10 +14,12 @@ load_dotenv("config.env")
 embeddings_model_name = os.environ.get("EMBEDDINGS_MODEL_NAME")
 persist_directory = os.environ.get('PERSIST_DIRECTORY')
 target_source_chunks = int(os.environ.get('TARGET_SOURCE_CHUNKS', 4))
-# openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = os.getenv("OPENAI_API_KEY")
 from constants import CHROMA_SETTINGS
 
-
+import os
+os.environ["http_proxy"] = "http://127.0.0.1:10809"
+os.environ["https_proxy"] = "http://127.0.0.1:10809"
 
 if __name__ == '__main__':
     embeddings = HuggingFaceEmbeddings(model_name=embeddings_model_name)

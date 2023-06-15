@@ -164,11 +164,22 @@ def main():
     db = None
 
 
+os.environ["http_proxy"] = "http://127.0.0.1:10809"
+os.environ["https_proxy"] = "http://127.0.0.1:10809"
 
 
 if __name__ == "__main__":
     # main()
 
+    # embeddings = HuggingFaceEmbeddings(model_name=embeddings_model_name)
+    # db = Chroma(persist_directory=persist_directory, embedding_function=embeddings, client_settings=CHROMA_SETTINGS)
+    # print(db.similarity_search("怎么增强体质"))
+
+    # 此处采用Chroma向量数据库，此外还有ES、Redis、pinecone、
+    # 加载嵌入向量字典
     embeddings = HuggingFaceEmbeddings(model_name=embeddings_model_name)
+    # 加载本地向量库
     db = Chroma(persist_directory=persist_directory, embedding_function=embeddings, client_settings=CHROMA_SETTINGS)
-    print(db.similarity_search("怎么增强体质"))
+    print(db.similarity_search("熬夜对身体有什么危害？"))
+
+

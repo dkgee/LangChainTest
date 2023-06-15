@@ -37,6 +37,9 @@ class ChatGLM(LLM):
         self.history = self.history + [[None, resp['response']]]
         return resp['response']
 
+import os
+os.environ["http_proxy"] = "http://127.0.0.1:10809"
+os.environ["https_proxy"] = "http://127.0.0.1:10809"
 
 if __name__ == '__main__':
     import requests
